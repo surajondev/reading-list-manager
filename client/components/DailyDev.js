@@ -15,7 +15,7 @@ const DailyDev = () => {
 
     useEffect(() => {
         if(address){
-            axios.post("http://localhost:8000/dbFind", {
+            axios.post("https://reading-list-manager.herokuapp.com/dbFind", {
                 "public_key":address,
                 "src":"daily_dev"
             })
@@ -33,7 +33,7 @@ const DailyDev = () => {
     const handleSubmit = () => {
         setSubmit(true)
         if(address && url){
-            axios.post("http://localhost:8000/db", {
+            axios.post("https://reading-list-manager.herokuapp.com/db", {
                 "public_key":address,
                 "daily_dev":url
             })
@@ -41,7 +41,7 @@ const DailyDev = () => {
                 console.log(response.data)
             })
         }
-        axios.post("http://localhost:8000/dailydev", {
+        axios.post("https://reading-list-manager.herokuapp.com/dailydev", {
             "url":url
         })
         .then((response) => {

@@ -15,7 +15,7 @@ const DevCommunity = () => {
 
     useEffect(() => {
         if(address){
-            axios.post("http://localhost:8000/dbFind", {
+            axios.post("https://reading-list-manager.herokuapp.com/dbFind", {
                 "public_key":address,
                 "src":"dev_to"
             })
@@ -33,7 +33,7 @@ const DevCommunity = () => {
     const handleSubmit = () => {
         setSubmit(true)
         if(address){
-            axios.post("http://localhost:8000/db", {
+            axios.post("https://reading-list-manager.herokuapp.com/db", {
                 "public_key":address,
                 "dev_to":apiKey
             })
@@ -41,7 +41,7 @@ const DevCommunity = () => {
                 console.log(response.data)
             })
         }
-        const url = `http://localhost:8000/devto`
+        const url = `https://reading-list-manager.herokuapp.com/devto`
         axios.post(url, {
             "api":apiKey
         })
