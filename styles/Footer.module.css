@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 3em;
+    padding-bottom: 2em;
+    bottom: 0;
+}
+
+.iconContainer{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    justify-content: space-between;
+}
