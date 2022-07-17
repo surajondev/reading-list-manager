@@ -16,7 +16,9 @@ export const InputContainer = ({width, onChange, placeholder}) => {
   return (
     <div style={{display:"flex",justifyContent:"center"}}>
         <InputGroup w={width}>
-            <InputRightElement children={<ChildSearch />} />
+            <InputRightElement>
+                <ChildSearch />
+            </InputRightElement>
             <Input focusBorderColor='#1E50FF' onChange={onChange} placeholder={placeholder} />
         </InputGroup>
     </div>
