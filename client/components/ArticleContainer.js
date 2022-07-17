@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import ArticleList from './cards/ArtilceCard'
 import {Grid} from '@chakra-ui/react';
 import {motion} from 'framer-motion'
-import InputContainer from './mini-compnents/InputContainer';
+import {InputContainer} from './mini-compnents/InputContainer';
 
 export const ArticleContainer = ({nestData, data}) => {
     const [searchStr, setSearchStr] = useState()

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useAddress } from '@thirdweb-dev/react'
 import { ArticleContainer } from './ArticleContainer'
-import InputContainer from './mini-compnents/InputContainer'
+import {InputContainer} from './mini-compnents/InputContainer'
 
 const DailyDev = () => {
     const [submit, setSubmit] = useState(false)
