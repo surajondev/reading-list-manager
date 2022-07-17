@@ -11,6 +11,10 @@ app.use(cors()) // Use this after the variable declaration
 
 app.use(express.json({extended:false}))
 
+app.get('/', (req, res)=>{
+    res.send("Hello World")
+})
+
 app.post('/dbFind', async(req, res) => {
     const connection = mysql.createConnection(process.env.DATABASE_URL);
     connection.query('SELECT * FROM platform WHERE public_key=?;', [req.body.public_key], 
@@ -71,7 +75,6 @@ app.post('/devto', (req, res) =>{
         let allBookmark = []
         // let i = 1;
         const addBookmark = (i) => {
-            console.log(i)
             const url = `https://dev.to/api/readinglist?per_page=100&page=${i}`
             axios.get(url, {
                 headers:{
