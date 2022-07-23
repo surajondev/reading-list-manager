@@ -5,7 +5,6 @@ export default [
     "linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%)",
     "linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)",
     "linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)",
-    "linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)",
     "linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)",
     "linear-gradient(to right, #12c2e9, #c471ed, #f64f59)",
     "linear-gradient(to right, #8e2de2, #4a00e0)",

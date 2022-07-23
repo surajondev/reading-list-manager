@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import ReactPaginate from 'react-paginate'
 import {AiFillLeftCircle, AiFillRightCircle} from 'react-icons/ai'
 import { IconContext } from "react-icons";
-import ArticleList from './cards/ArtilceCard'
+import ArticleCard from './cards/ArticleCard'
 import {Grid} from '@chakra-ui/react';
 import {motion} from 'framer-motion'
 import {InputContainer} from './mini-compnents/InputContainer';
@@ -10,6 +10,7 @@ import {InputContainer} from './mini-compnents/InputContainer';
 export const ArticleContainer = ({nestData, data}) => {
     const [searchStr, setSearchStr] = useState()
     const [page, setPage] = useState(0)
+
     return (
     <div>
         <InputContainer 
@@ -22,7 +23,7 @@ export const ArticleContainer = ({nestData, data}) => {
                 nestData.length > 0 && !searchStr &&
                 nestData[page].map((data) => {
                 const tag =  data.article.tags
-                return <ArticleList imgURL={data.imgURL}  key={data.article.url} title={data.article.title} link={data.article.url} tag={tag.split(',')}/>
+                return <ArticleCard imgURL={data.imgURL}  key={data.article.url} title={data.article.title} link={data.article.url} tag={tag.split(',')}/>
                 })
             }
             {
@@ -35,7 +36,7 @@ export const ArticleContainer = ({nestData, data}) => {
                 }
                 }).map((filterElement) => {
                 const tag =  filterElement.article.tags
-                    return <ArticleList imgURL={filterElement.imgURL}  key={filterElement.article.url} title={filterElement.article.title} link={filterElement.article.url} tag={tag.split(',')}/>
+                    return <ArticleCard imgURL={filterElement.imgURL}  key={filterElement.article.url} title={filterElement.article.title} link={filterElement.article.url} tag={tag.split(',')}/>
                 })
             }
         </Grid>

@@ -42,7 +42,6 @@ app.post('/db', async (req, res) => {
                 [req.body.id, req.body.public_key, req.body.dev_to, req.body.daily_dev],  
                 function (err, rows, fields) {
                     if (err) throw err
-                
                     res.send("ADDED")
                 })
             }
@@ -82,13 +81,16 @@ app.post('/devto', (req, res) =>{
                 }
             })
             .then((response) => {
-                allBookmark = allBookmark.concat(response.data)
-                // res.send(allBookmark)
-                // console.log(response.data.length)
-                if(response.data.length == 100){
-                    addBookmark(i+1)
+                if(response.status == 200){
+                    allBookmark = allBookmark.concat(response.data)
+                    if(response.data.length == 100){
+                        addBookmark(i+1)
+                    }
+                    else{
+                        res.send(allBookmark)
+                    }
                 }else{
-                    res.send(allBookmark)
+                    res.send("Enter correct dev.to API key")
                 }
             })
         }
@@ -97,33 +99,33 @@ app.post('/devto', (req, res) =>{
     } catch (error) {
         console.log(error)
     }
-    
-    // res.send("HEELO ")
 })
 
 app.post('/dailydev', (req, res) =>{
     const url = req.body.url
     axios.get(url)
     .then((response) => {
-        const data = []
-        parseString(response.data, (err, result) =>{
-            result.rss.channel[0].item.map((element) => {
-                let tags = ""
-                element.category.map((tag) => {
-                    tags = tags + tag + ","
-                })
-                const editedTags = tags.slice(0, -1)
-                const dataObj = {
-                    "article":{
-                        "title":element.title[0],
-                        "url":element.link[0],
-                        "tags":editedTags
+            const data = []
+            parseString(response.data, (err, result) =>{
+                result.rss.channel[0].item.map((element) => {
+                    let tags = ""
+                    element.category.map((tag) => {
+                        tags = tags + tag + ","
+                    })
+                    const editedTags = tags.slice(0, -1)
+                    const dataObj = {
+                        "article":{
+                            "title":element.title[0],
+                            "url":element.link[0],
+                            "tags":editedTags
+                        }
                     }
-                }
-                data.push(dataObj)
+                    data.push(dataObj)
+                })
             })
-        })
-        res.send(data)
+            res.send(data)
+    }).catch(err => {
+        res.send({error:"Incorrect daily.dev shearable bookmark"})
     })
 })
 

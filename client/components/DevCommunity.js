@@ -1,4 +1,4 @@
-import { Input, Button, Grid, GridItem } from '@chakra-ui/react'
+import {Button } from '@chakra-ui/react'
 import styles from '../styles/DailyDev.module.css'
 import { useState, useEffect } from "react"
 import axios from 'axios'
@@ -7,6 +7,7 @@ import { ArticleContainer } from './ArticleContainer'
 import {InputContainer} from './mini-compnents/InputContainer'
 
 const DevCommunity = () => {
+    const BACKEND = process.env.BACKEND
     const [submit, setSubmit] = useState(false)
     const [apiKey, setApiKey] = useState()
     const [data, setData] = useState()
@@ -15,7 +16,7 @@ const DevCommunity = () => {
 
     useEffect(() => {
         if(address){
-            axios.post("https://reading-list-manager.herokuapp.com/dbFind", {
+            axios.post(`${BACKEND}/dbFind`, {
                 "public_key":address,
                 "src":"dev_to"
             })
@@ -33,7 +34,7 @@ const DevCommunity = () => {
     const handleSubmit = () => {
         setSubmit(true)
         if(address){
-            axios.post("https://reading-list-manager.herokuapp.com/db", {
+            axios.post(`${BACKEND}/db`, {
                 "public_key":address,
                 "dev_to":apiKey
             })
@@ -41,7 +42,7 @@ const DevCommunity = () => {
                 console.log(response.data)
             })
         }
-        const url = `https://reading-list-manager.herokuapp.com/devto`
+        const url = `${BACKEND}/devto`
         axios.post(url, {
             "api":apiKey
         })
@@ -76,7 +77,7 @@ const DevCommunity = () => {
                 <div className={styles.inputContainer}>
                     <InputContainer 
                         width="60%"  
-                        onChange={(event) => setUrl(event.target.value)} 
+                        onChange={(event) => setApiKey(event.target.value)} 
                         placeholder="Enter API Key"
                     />
                     <Button className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>

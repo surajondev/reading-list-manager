@@ -4,6 +4,7 @@ import DailyDev from "../components/DailyDev"
 import DevCommunity from "../components/DevCommunity"
 import Head from 'next/head'
 import { Footer } from "../components/Footer"
+import HeaderCard from "../components/cards/HeaderCard"
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <div style={{left:"20%",top:"60%"}} className="gradient"/>
       <div style={{"position":"relative","zIndex":"2"}}>
         <Header primary="home"/>
+        <HeaderCard />
         <Tabs colorScheme="blue" className="container" variant='soft-rounded' _focus={{outline:"none"}} _active={{outline:"none"}}>
           <TabList>
             <Tab color='' _focus={{outline:"none"}} className="tabButton">daily.dev</Tab>
