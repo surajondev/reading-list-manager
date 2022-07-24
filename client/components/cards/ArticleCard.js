@@ -10,7 +10,7 @@ const ArticleCard = ({title, link, tag, imgURL}) => {
                 initial={{x:-10, opacity:0}}
                 animate={{x:0, opacity:1}}
             >
-                <div className="articleImg" style={{"background":Gradients[Math.floor(Math.random()*30)]}}>
+                <div className="articleImg" style={{"background":Gradients[Math.floor(Math.random()*29)]}}>
                     <Image src={imgURL}/>
                 </div>
                 <div className="tagContainer">

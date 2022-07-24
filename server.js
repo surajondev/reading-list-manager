@@ -125,6 +125,7 @@ app.post('/dailydev', (req, res) =>{
             })
             res.send(data)
     }).catch(err => {
+        console.log(1)
         res.send({error:"Incorrect daily.dev shearable bookmark"})
     })
 })

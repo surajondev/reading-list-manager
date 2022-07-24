@@ -1,4 +1,4 @@
-import {Button} from '@chakra-ui/react'
+import {Button, TabsProvider} from '@chakra-ui/react'
 import styles from '../styles/DailyDev.module.css'
 import { useEffect, useState } from "react"
 import axios from 'axios'
@@ -13,7 +13,7 @@ const DailyDev = () => {
     const [url, setUrl] = useState()
     const [data, setData] = useState()
     const [nestData, setNestData] = useState([])
-    const [toastify, setToastify] = useState('data')
+    const [toastify, setToastify] = useState('')
     const address = useAddress();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const DailyDev = () => {
                 "public_key":address,
                 "src":"daily_dev"
             })
-            .then(async (response) => {
+            .then((response) => {
                 if(response.data != "null"){
                     setUrl(response.data)
                     if(url != undefined){
@@ -34,7 +34,6 @@ const DailyDev = () => {
     }, [address, url])
     
     const handleSubmit = () => {
-        setSubmit(true)
         if(address && url){
             axios.post(`${BACKEND}/db`, {
                 "public_key":address,
@@ -49,9 +48,10 @@ const DailyDev = () => {
         })
         .then((response) => {
             if(response.data.error){
-                setSubmit(false)
-                setToastify(response.data.error)
+                // setToastify(response.data.error)
+                return (<Toastify data={response.data.error} />)
             }else{
+                setSubmit(true)
                 setToastify('')
                 let newData = response.data
                 newData.map((data, i) => {
@@ -81,19 +81,18 @@ const DailyDev = () => {
     return(
         <div>
             {
-                !submit && toastify &&
+                !submit &&
                 <div className={styles.inputContainer}>
-                    {/* <Input onChange={(event) => setUrl(event.target.value)} placeholder='Enter Shareable RSS Feed Link' width="35em"></Input> */}
                     <InputContainer 
                         width="60%"  
                         onChange={(event) => setUrl(event.target.value)} 
                         placeholder="Enter Shareable RSS Feed Link"
                     />
-                    <Button className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
-                    {
-                        toastify && toastify!=='data' &&
+                    <Button _focus={{border:"none"}} className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
+                    {/* {
+                        toastify.length>0 && 
                         <Toastify data={toastify} />
-                    }
+                    } */}
                 </div>
             }
 
