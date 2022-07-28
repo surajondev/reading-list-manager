@@ -48,8 +48,7 @@ const DailyDev = () => {
         })
         .then((response) => {
             if(response.data.error){
-                // setToastify(response.data.error)
-                return (<Toastify data={response.data.error} />)
+                setToastify(response.data.error)
             }else{
                 setSubmit(true)
                 setToastify('')
@@ -89,10 +88,10 @@ const DailyDev = () => {
                         placeholder="Enter Shareable RSS Feed Link"
                     />
                     <Button _focus={{border:"none"}} className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
-                    {/* {
+                    {
                         toastify.length>0 && 
                         <Toastify data={toastify} />
-                    } */}
+                    }
                 </div>
             }
 

@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 4em auto;
+    justify-content: center;
+    width: 60%;
+    max-width: 1000px;
+}
+
+.imgContainer{
+    margin: 2em 0;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.content{
+    font-family: 'Inter';
+    font-size: 18px;
+}
