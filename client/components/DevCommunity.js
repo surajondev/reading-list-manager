@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useAddress } from '@thirdweb-dev/react'
 import { ArticleContainer } from './ArticleContainer'
 import {InputContainer} from './mini-compnents/InputContainer'
+import {Toastify} from './mini-compnents/Toastify'
 
 const DevCommunity = () => {
     const BACKEND = process.env.BACKEND
@@ -12,6 +13,7 @@ const DevCommunity = () => {
     const [apiKey, setApiKey] = useState()
     const [data, setData] = useState()
     const address = useAddress();
+    const [error, setError] = useState()
     const [nestData, setNestData] = useState([])
 
     useEffect(() => {
@@ -32,7 +34,6 @@ const DevCommunity = () => {
     }, [address, apiKey])
 
     const handleSubmit = () => {
-        setSubmit(true)
         if(address){
             axios.post(`${BACKEND}/db`, {
                 "public_key":address,
@@ -47,26 +48,32 @@ const DevCommunity = () => {
             "api":apiKey
         })
         .then((response) => {
-            let newData = response.data
-            newData.map((data, i) => {
-                const f = Math.floor(Math.random() * 31);
-                    if(f==0){
-                        f=f+1;
+            if(response.data.error){
+                setError(response.data.error)
+                // console.log(response.data.error)
+            }else{
+                setSubmit(true)
+                let newData = response.data
+                newData.map((data, i) => {
+                    const f = Math.floor(Math.random() * 31);
+                        if(f==0){
+                            f=f+1;
+                        }
+                        data.imgURL = `/assets/vector${f}.png`
+                })
+                setData(newData)
+                let demoArr = []
+                    for(let i=0;i<=newData.length/20;i++){
+                        let arrData = []
+                        if(i==newData.legth/20){
+                            arrData = newData.slice(i*20, i*20 + (newData.legth%20))
+                        }else{
+                            arrData = newData.slice(i*20, 20*(i+1))
+                        }
+                        demoArr.push(arrData)
                     }
-                    data.imgURL = `/assets/vector${f}.png`
-            })
-            setData(newData)
-            let demoArr = []
-                for(let i=0;i<=newData.length/20;i++){
-                    let arrData = []
-                    if(i==newData.legth/20){
-                        arrData = newData.slice(i*20, i*20 + (newData.legth%20))
-                    }else{
-                        arrData = newData.slice(i*20, 20*(i+1))
-                    }
-                    demoArr.push(arrData)
+                    setNestData(demoArr)
                 }
-                setNestData(demoArr)
         })
     }
 
@@ -74,18 +81,24 @@ const DevCommunity = () => {
         <div className={styles.container}>
             {
                 !submit && 
-                <div className={styles.inputContainer}>
-                    <InputContainer 
-                        width="60%"  
-                        onChange={(event) => setApiKey(event.target.value)} 
-                        placeholder="Enter API Key"
-                    />
-                    <Button className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
+                <div>
+                    <div className={styles.inputContainer}>
+                        <InputContainer 
+                            width="60%"  
+                            onChange={(event) => setApiKey(event.target.value)} 
+                            placeholder="Enter API Key"
+                        />
+                        <Button className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
+                    </div>
+                    {
+                        error && 
+                        <Toastify data={error}/>
+                    }   
                 </div>
             }
 
             {
-                submit &&
+                submit && !error &&
                 <ArticleContainer nestData={nestData} data={data} />
             }
         </div>    

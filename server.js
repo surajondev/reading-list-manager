@@ -70,7 +70,6 @@ app.post('/db', async (req, res) => {
 })
 
 app.post('/devto', (req, res) =>{
-    try {
         let allBookmark = []
         // let i = 1;
         const addBookmark = (i) => {
@@ -81,24 +80,19 @@ app.post('/devto', (req, res) =>{
                 }
             })
             .then((response) => {
-                if(response.status == 200){
-                    allBookmark = allBookmark.concat(response.data)
-                    if(response.data.length == 100){
-                        addBookmark(i+1)
-                    }
-                    else{
-                        res.send(allBookmark)
-                    }
-                }else{
-                    res.send("Enter correct dev.to API key")
+                allBookmark = allBookmark.concat(response.data)
+                if(response.data.length == 100){
+                    addBookmark(i+1)
                 }
+                else{
+                   res.send(allBookmark)
+                }
+            }).catch(err => {
+                res.send({error:"Incorrect dev.to shearable bookmark"})
             })
         }
         addBookmark(1);
         // res.send(allBookmark);
-    } catch (error) {
-        console.log(error)
-    }
 })
 
 app.post('/dailydev', (req, res) =>{

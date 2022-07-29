@@ -1,32 +1,13 @@
 import React from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Box } from '@chakra-ui/react'
 
 const Toastify = ({data}) => {
-    toast(data, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
     
     return (
-        <div>
-            <ToastContainer
-                position="top-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            {/* {console.log(data)} */}
+        <div className='erroContainer'>
+            <Box bg='tomato' w='100%' p={4} color='white'>
+                {data}
+            </Box>
         </div>
     )
 }

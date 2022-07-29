@@ -1,4 +1,4 @@
-import {Button, TabsProvider} from '@chakra-ui/react'
+import {Button} from '@chakra-ui/react'
 import styles from '../styles/DailyDev.module.css'
 import { useEffect, useState } from "react"
 import axios from 'axios'
@@ -13,8 +13,8 @@ const DailyDev = () => {
     const [url, setUrl] = useState()
     const [data, setData] = useState()
     const [nestData, setNestData] = useState([])
-    const [toastify, setToastify] = useState('')
-    const address = useAddress();
+    const [error, setError] = useState('')
+    const address = useAddress()
 
     useEffect(() => {
         if(address){
@@ -48,10 +48,9 @@ const DailyDev = () => {
         })
         .then((response) => {
             if(response.data.error){
-                setToastify(response.data.error)
+                setError(response.data.error)
             }else{
                 setSubmit(true)
-                setToastify('')
                 let newData = response.data
                 newData.map((data, i) => {
                     const f = Math.floor(Math.random() * 31);
@@ -81,22 +80,25 @@ const DailyDev = () => {
         <div>
             {
                 !submit &&
-                <div className={styles.inputContainer}>
-                    <InputContainer 
-                        width="60%"  
-                        onChange={(event) => setUrl(event.target.value)} 
-                        placeholder="Enter Shareable RSS Feed Link"
-                    />
-                    <Button _focus={{border:"none"}} className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
+                <div>
+                    <div className={styles.inputContainer}>
+                        <InputContainer 
+                            width="60%"  
+                            onChange={(event) => setUrl(event.target.value)} 
+                            placeholder="Enter Shareable RSS Feed Link"
+                        />
+                        <Button _focus={{border:"none"}} className={styles.button} onClick={handleSubmit} colorScheme="pink">Search</Button>
+                    </div>
                     {
-                        toastify.length>0 && 
-                        <Toastify data={toastify} />
-                    }
+                        error && 
+                        <Toastify data={error}/>
+                    }    
                 </div>
             }
+            
 
             { 
-                submit && !toastify &&
+                submit && !error &&
                 <ArticleContainer nestData={nestData} data={data} />
             }
         </div>
