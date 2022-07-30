@@ -4,6 +4,7 @@ var cors = require('cors')
 require('dotenv').config();
 const mysql = require('mysql2');
 const { parseString } = require('xml2js')
+const cheerio = require('cheerio');
 
 const app = express()
 
@@ -120,6 +121,27 @@ app.post('/dailydev', (req, res) =>{
             res.send(data)
     }).catch(err => {
         res.send({error:"Incorrect daily.dev shearable bookmark"})
+    })
+})
+
+app.post('/medium', (req, res) =>{
+    const url = req.body.url
+    let blogList = []
+    axios.get(url)
+    .then((response) => {
+        const data = cheerio.load(response.data)
+        data('article').each((index, element) => {
+            const listData = {
+                title:"",
+                url:"",
+                tag:""
+            }
+            listData.tag=data(element).find('.mg').text()
+            listData.title = data(element).find('.ip').text()
+            listData.url = data(element).find('.ip').attr('au')
+            blogList.push(listData)
+        })
+        res.send(blogList)
     })
 })
 

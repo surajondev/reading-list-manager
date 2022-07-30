@@ -4,6 +4,7 @@ import { Button, Heading, Image } from '@chakra-ui/react'
 import ArticleCard from './ArticleCard'
 import {FaDev} from 'react-icons/fa'
 import {SiHashnode} from 'react-icons/si'
+import {BsMedium} from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 
 const HeaderCard = () => {
@@ -19,7 +20,7 @@ const HeaderCard = () => {
                 <Button mt={5} colorScheme="pink">Try Yourself!</Button>
             </div>
             <div style={{marginLeft:"5em",display:"flex"}}>
-                <ArticleCard title="Open Source for better career oportunity" tag={["Open Source", "GitHub", "Guide"]} imgURL="/assets/vector5.png" link="http://localhost:3000"/>
+                <ArticleCard title="Open Source for better career oportunity" tag={["Open Source", "GitHub", "Guide"]} imgURL="/assets/vector5.png" link='/'/>
             </div>
         </div>
         <div className={styles.iconContainer}>
@@ -27,7 +28,7 @@ const HeaderCard = () => {
                 <IconContext.Provider value={{ color: "white", size:"2.5em", className:"devtoContainer" }}>
                     <FaDev />
                 </IconContext.Provider>
-                <Heading ml={1} size="lg">The Practical Dev</Heading>
+                <Heading ml={1} size="lg">Practical Dev</Heading>
             </div>
             <div className={styles.devtoContainer}>
                 <Image src='/dailydev.png' height="3.5em"/>
@@ -38,6 +39,12 @@ const HeaderCard = () => {
                     <SiHashnode />
                 </IconContext.Provider>
                 <Heading ml={1} size="lg">Hashnode</Heading>
+            </div>
+            <div className={styles.devtoContainer}>
+                <IconContext.Provider value={{ color: "white", size:"2.5em" }}>
+                    <BsMedium />
+                </IconContext.Provider>
+                <Heading ml={1} size="lg">Medium</Heading>
             </div>
         </div>
     </div>
