@@ -12,6 +12,7 @@ export default function Home() {
     <div style={{"position":"relative"}}>
       <Head>
         <title>CryptoMark - Reading Bookmark Manager</title>
+      </Head>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} />
         <Script id="google-analytics" strategy="afterInteractive">
         {`
@@ -22,7 +23,6 @@ export default function Home() {
           gtag('config', ${process.env.NEXT_PUBLIC_GA_TRACKING_ID});
         `}
       </Script>
-      </Head>
       <div style={{left:"-200px",top:"-200px"}} className="gradient"/>
       <div style={{left:"60%",top:"20%"}} className="gradient"/>
       <div style={{left:"20%",top:"60%"}} className="gradient"/>
