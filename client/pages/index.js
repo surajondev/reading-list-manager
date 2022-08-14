@@ -5,13 +5,23 @@ import DevCommunity from "../components/DevCommunity"
 import Head from 'next/head'
 import { Footer } from "../components/Footer"
 import HeaderCard from "../components/cards/HeaderCard"
-
+import Script from 'next/script'
 
 export default function Home() {
   return (
     <div style={{"position":"relative"}}>
       <Head>
         <title>CryptoMark - Reading Bookmark Manager</title>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} />
+        <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', ${process.env.NEXT_PUBLIC_GA_TRACKING_ID});
+        `}
+      </Script>
       </Head>
       <div style={{left:"-200px",top:"-200px"}} className="gradient"/>
       <div style={{left:"60%",top:"20%"}} className="gradient"/>

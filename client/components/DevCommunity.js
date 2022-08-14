@@ -8,7 +8,7 @@ import {InputContainer} from './mini-compnents/InputContainer'
 import {Toastify} from './mini-compnents/Toastify'
 
 const DevCommunity = () => {
-    const BACKEND = process.env.BACKEND
+    const BACKEND = process.env.NEXT_PUBLIC_BACKEND
     const [submit, setSubmit] = useState(false)
     const [apiKey, setApiKey] = useState()
     const [data, setData] = useState()

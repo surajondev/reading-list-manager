@@ -8,7 +8,7 @@ import {InputContainer} from './mini-compnents/InputContainer'
 import Toastify from './mini-compnents/Toastify'
 
 const DailyDev = () => {
-    const BACKEND = process.env.BACKEND
+    const BACKEND = process.env.NEXT_PUBLIC_BACKEND
     const [submit, setSubmit] = useState(false)
     const [url, setUrl] = useState()
     const [data, setData] = useState()
