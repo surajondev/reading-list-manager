@@ -5,25 +5,30 @@ import DevCommunity from "../components/DevCommunity"
 import Head from 'next/head'
 import { Footer } from "../components/Footer"
 import HeaderCard from "../components/cards/HeaderCard"
-import Script from 'next/script'
 
 export default function Home() {
   return (
     <div style={{"position":"relative"}}>
       <Head>
         <title>CryptoMark - Reading Bookmark Manager</title>
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
       </Head>
-        {/* Global site tag (gtag.js) - Google Analytics */}
-        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} />
-        <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
-        `}
-      </Script>
       <div style={{left:"-200px",top:"-200px"}} className="gradient"/>
       <div style={{left:"60%",top:"20%"}} className="gradient"/>
       <div style={{left:"20%",top:"60%"}} className="gradient"/>
