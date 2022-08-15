@@ -20,7 +20,7 @@ export default function Home() {
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', ${process.env.NEXT_PUBLIC_GA_TRACKING_ID});
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
         `}
       </Script>
       <div style={{left:"-200px",top:"-200px"}} className="gradient"/>
