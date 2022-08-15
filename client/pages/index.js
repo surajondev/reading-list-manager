@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
         {/* Global site tag (gtag.js) - Google Analytics */}
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} />
-        <Script>
+        <Script id="google-analytics">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
