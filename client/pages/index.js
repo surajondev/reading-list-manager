@@ -11,22 +11,6 @@ export default function Home() {
     <div style={{"position":"relative"}}>
       <Head>
         <title>CryptoMark - Reading Bookmark Manager</title>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            
-              gtag('config', 'G-6FQHS0GHKQ');
-          `,
-            }}
-          />
       </Head>
       <div style={{left:"-200px",top:"-200px"}} className="gradient"/>
       <div style={{left:"60%",top:"20%"}} className="gradient"/>
