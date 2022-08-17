@@ -1,7 +1,10 @@
 import '../styles/globals.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { ThirdwebProvider, ChainId } from "@thirdweb-dev/react";
+import { useEffect } from 'react'
 import Script from 'next/script'
+import { useRouter } from 'next/router'
+import * as gtag from '../lib/gtag'
 
 const theme = extendTheme({
   colors: {
@@ -10,6 +13,19 @@ const theme = extendTheme({
     }
   }
 })
+
+const router = useRouter()
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on('hashChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('hashChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
 function MyApp({ Component, pageProps }) {
   const desiredChainId = ChainId.Mumbai;
