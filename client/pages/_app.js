@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
     <ThirdwebProvider desiredChainId={desiredChainId} >
       <ChakraProvider theme={theme}>
         <div className="background">
-          <Component {...pageProps} />
           <Script
             strategy="lazyOnload"
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
@@ -33,7 +32,7 @@ function MyApp({ Component, pageProps }) {
                     });
                         `}
           </Script>
-
+          <Component {...pageProps} />
         </div>
       </ChakraProvider>
     </ThirdwebProvider>
