@@ -5,6 +5,7 @@ import DevCommunity from "../components/DevCommunity";
 import Head from "next/head";
 import { Footer } from "../components/Footer";
 import HeaderCard from "../components/cards/HeaderCard";
+import Script from "next/script";
 
 export default function Home() {
   return (
